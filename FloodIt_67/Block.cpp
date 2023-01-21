@@ -3,6 +3,7 @@
 using namespace std;
 
 
+Block::Block(Colors color) : _color(color), _changed(true) {}
 
 void Block::switchColor(Colors newColor)
 {
@@ -21,6 +22,11 @@ void Block::switchColor(Colors newColor)
 			blockPtr->switchColor(newColor);
 		}
 	}
+}
+
+void Block::addAdjacent(Block* blockPtr)
+{
+	_adjacents.push_back(blockPtr);
 }
 
 

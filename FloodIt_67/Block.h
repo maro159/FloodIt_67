@@ -11,8 +11,7 @@ private:
 	bool _changed;
 
 public:
+	Block(Colors color);
 	void switchColor(Colors newColor);
-	friend std::ostream& operator<<(std::ostream& os, const Block& rhs);
+	void addAdjacent(Block* block);
 };
-
-std::ostream& operator<<(std::ostream& os, const Block& rhs);

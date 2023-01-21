@@ -1,18 +1,18 @@
 #include <iostream>
-#include "ConsoleTools.h"
+#include "ConsoleGUI.h"
 
 std::map<Colors, int> colorDecoder
 {
-    { Green, 2 },
-    { Aqua, 3 },
-    { Red, 4 },
-    { Purple, 5 },
-    { Yellow, 6 },
-    { White, 15 },
+    { Colors::Green, 2 },
+    { Colors::Aqua, 3 },
+    { Colors::Red, 4 },
+    { Colors::Purple, 5 },
+    { Colors::Yellow, 6 },
+    { Colors::White, 15 },
 };
 
 
-//void ConsoleTools::SetFontSize(SHORT x, SHORT y)
+//void ConsoleGUI::SetFontSize(SHORT x, SHORT y)
 //{
 //    // Get the console handle
 //    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -31,20 +31,20 @@ std::map<Colors, int> colorDecoder
 //
 //}
 
-void ConsoleTools::SetColor(Colors color)
+void ConsoleGUI::setColor(Colors color)
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     int colorCode = colorDecoder[color];
     SetConsoleTextAttribute(out, colorCode);
 }
 
-void ConsoleTools::ResetColor()
+void ConsoleGUI::resetColor()
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(out, 7);
 }
 
-void ConsoleTools::SetCursor(UINT x, UINT y)
+void ConsoleGUI::setCursor(unsigned int x, unsigned int y)
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD cord;
@@ -53,18 +53,17 @@ void ConsoleTools::SetCursor(UINT x, UINT y)
     SetConsoleCursorPosition(out, cord);
 }
 
-void ConsoleTools::DrawBlock(UINT x, UINT y, UINT size, Colors color)
+void ConsoleGUI::drawBlock(unsigned int x, unsigned int y, unsigned int size, Colors color)
 {
-    SetColor(color);
-    for (UINT i = 0; i < size; i++)
+    setColor(color);
+    for (unsigned int i = 0; i < size; i++)
     {
-        SetCursor(x, y);
-        for (UINT j = 0; j < 2*size; j++)
+        setCursor(x, y);
+        for (unsigned int j = 0; j < 2*size; j++)
         {
             std::cout << char(219);
         }
         y++;
     }
-    ResetColor();
-    
+    resetColor();
 }

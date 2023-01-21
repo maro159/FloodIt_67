@@ -1,19 +1,16 @@
 ﻿#include <iostream>
-#include "ConsoleTools.h"
+#include <cstdlib>
+#include <ctime>
 
+#include "ConsoleGUI.h"
 
 using namespace std;
 
 
 int main()
 {
-    ConsoleTools tool;
-    //tool.SetFontSize(8, 8);
+	srand(time(NULL));
 
-	for (size_t i = 0; i < 6; i++)
-	{
-		tool.DrawBlock(i * 20, 0, 10, (Colors)i);
-	}
 
 }
 
