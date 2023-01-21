@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ConsoleTools.cpp" />
-    <ClCompile Include="src\FloodIt_67.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\ConsoleTools.h" />
     <ClInclude Include="include\Nagłówek.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ConsoleTools.cpp" />
+    <ClCompile Include="src\FloodIt_67.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
