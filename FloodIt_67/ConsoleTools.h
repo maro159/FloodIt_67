@@ -1,11 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <map>
-
-enum Colors
-{
-    Green, Aqua, Red, Purple, Yellow, White
-};
+#include "Helpers.h"
 
 
 class ConsoleTools
