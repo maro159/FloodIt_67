@@ -2,5 +2,5 @@
 
 enum class Colors
 {
-    Green, Aqua, Red, Purple, Yellow, White
+    Green, Aqua, Red, Purple, Yellow, White, Default
 };

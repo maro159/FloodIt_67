@@ -1,9 +1,14 @@
 #include <ostream>
 #include "Block.h"
+
+
 using namespace std;
 
 
-Block::Block(Colors color) : _color(color), _changed(true) {}
+Block::Block(Colors color, Grid *gridOwner) : _color(color), _gridOwner(gridOwner), _changed(true) {}
+
+Colors Block::getColor() const { return _color; }
+bool Block::isChanged() const { return _changed; }
 
 void Block::switchColor(Colors newColor)
 {
@@ -14,7 +19,8 @@ void Block::switchColor(Colors newColor)
 		_color = newColor;
 		_changed = true;
 
-		// TODO: Update color counters
+		// Update color counters
+		_gridOwner->updateColorCounter(oldColor, newColor);
 
 		// Change color of adjacents
 		for (Block* blockPtr : _adjacents)
@@ -27,11 +33,4 @@ void Block::switchColor(Colors newColor)
 void Block::addAdjacent(Block* blockPtr)
 {
 	_adjacents.push_back(blockPtr);
-}
-
-
-ostream& operator<<(ostream& out, const Block& rhs)
-{
-	out << "";
-	return out;
 }

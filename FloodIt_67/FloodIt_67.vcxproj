@@ -139,15 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="ConsoleGUI.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Helpers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="ConsoleGUI.cpp" />
-    <ClCompile Include="FloodIt_67.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Grid.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,7 +9,11 @@ std::map<Colors, int> colorDecoder
     { Colors::Purple, 5 },
     { Colors::Yellow, 6 },
     { Colors::White, 15 },
+    { Colors::Default, 7 }
 };
+
+ConsoleGUI::ConsoleGUI(unsigned int blockSize, unsigned int gridXPos, unsigned int gridYPos) :
+    _blockSize(blockSize), _gridXPos(gridXPos), _gridYPos(gridYPos) {}
 
 
 //void ConsoleGUI::SetFontSize(SHORT x, SHORT y)
@@ -38,12 +42,6 @@ void ConsoleGUI::setColor(Colors color)
     SetConsoleTextAttribute(out, colorCode);
 }
 
-void ConsoleGUI::resetColor()
-{
-    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(out, 7);
-}
-
 void ConsoleGUI::setCursor(unsigned int x, unsigned int y)
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -53,17 +51,40 @@ void ConsoleGUI::setCursor(unsigned int x, unsigned int y)
     SetConsoleCursorPosition(out, cord);
 }
 
-void ConsoleGUI::drawBlock(unsigned int x, unsigned int y, unsigned int size, Colors color)
+void ConsoleGUI::drawBlock(unsigned int x, unsigned int y, Colors color)
 {
     setColor(color);
-    for (unsigned int i = 0; i < size; i++)
+    for (unsigned int y = 0; y < _blockSize; y++)
     {
         setCursor(x, y);
-        for (unsigned int j = 0; j < 2*size; j++)
+        for (unsigned int x = 0; x < 2* _blockSize; x++)
         {
             std::cout << char(219);
         }
-        y++;
+        y++;    // next row
     }
-    resetColor();
+    setColor(Colors::Default); 
+}
+
+
+void ConsoleGUI::redrawGrid(Grid& grid)
+{
+    auto rowSize = grid.getRowSize();
+    auto colSize = grid.getColSize();
+
+    for (size_t row = 0; row < rowSize; row++)
+    {
+        for (size_t col = 0; col < colSize; col++)
+        {
+            Block block = grid.getBlocks()[row][col];
+            if (block.isChanged())
+            {
+                // calculate x coord of block to be drawn (needs to be multiplied by 2 because of console char ratio is 2:1)
+                unsigned int blockXPos = _gridXPos + 2 * col * _blockSize;
+                // calculate y coord of block to be drawn
+                unsigned int blockYPos = _gridYPos + row * _blockSize;
+                drawBlock(blockXPos, blockYPos, block.getColor());
+            }
+        }
+    }
 }

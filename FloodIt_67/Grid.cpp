@@ -6,6 +6,14 @@ using namespace std;
 
 Grid::Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors) : _rowSize(rowSize), _colSize(colSize), _noOfColors(noOfColors)
 {
+	// create counters for all colors
+	for (size_t i = 0; i < noOfColors; i++)
+	{
+		Colors color = static_cast<Colors>(i);
+		_colorCounter[color] = 0;
+	}
+
+
 	// create 2D array of blocks
 	for (size_t row = 0; row < rowSize; row++)
 	{
@@ -16,7 +24,9 @@ Grid::Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors) 
 			unsigned int randomNumber = rand() % (_noOfColors + 1);
 			Colors randomColor = static_cast<Colors>(randomNumber);
 			// add block to row
-			tmp.emplace_back(Block(randomColor));
+			tmp.emplace_back(Block(randomColor, this));
+			// update color counter
+			_colorCounter[randomColor]++;
 		}
 		// add row to matrix of blocks
 		_blocks.emplace_back(tmp);
@@ -51,7 +61,29 @@ Grid::Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors) 
 
 }
 
-void Grid::Flood(Colors color)
+unsigned int Grid::getRowSize() const { return _rowSize; }
+unsigned int Grid::getColSize() const { return _colSize; }
+unsigned int Grid::getNoOfColors() const { return _noOfColors; }
+
+
+void Grid::flood(Colors color)
 {
 	_blocks[0][0].switchColor(color);
 }
+
+void Grid::updateColorCounter(Colors oldColor, Colors newColor)
+{
+	auto x = _colorCounter[oldColor]--;
+	_colorCounter[newColor]++;
+}
+
+bool Grid::isWin() const
+{
+	for (const auto colorCount : _colorCounter)
+	{
+		if (colorCount.second == _rowSize * _colSize) return true;
+	}
+	return false;
+}
+
+std::vector<std::vector<Block>>& Grid::getBlocks() { return _blocks; }
