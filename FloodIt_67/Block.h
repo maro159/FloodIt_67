@@ -17,14 +17,16 @@ private:
 	std::vector<std::shared_ptr<Block>> _adjacents;
 	// true if color the block has changed
 	bool _changed;
+	//// check if color should be changed
+	//void checkAdjacent()
 
 
 public:
 	Block(Colors color, Grid *gridOwner);
 	// returns color of Block
 	Colors getColor() const;
-	// returns true if color of block has changed and needs to be redrawn
-	bool isChanged() const;
+	// returns true if color of block has changed and needs to be redrawn, changes value to false after read
+	bool isChanged();
 	// recursively changes color of the block and adjacent ones
 	void switchColor(Colors newColor);
 	// add block to list of adjacent ones by pointer

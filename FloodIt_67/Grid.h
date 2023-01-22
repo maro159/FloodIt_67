@@ -7,7 +7,7 @@
 class Grid
 {
 private:
-	Colors currentColor;
+	Colors _currentColor;
 	// number of rows in grid
 	unsigned int _rowSize;
 	// number of columns in grid
@@ -18,10 +18,16 @@ private:
 	std::vector<std::vector<std::shared_ptr<Block>>> _blocks;
 	// map with number of Block objects of each color
 	std::map<Colors, unsigned int> _colorCounter;
+	// number of moves done
+	unsigned int _moves;
+	// number of max moves
+	unsigned int _maxMoves;
 
 public:
 	Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors);
-
+	unsigned int getMoves() const;
+	unsigned int getMaxMoves() const;
+	Colors getCurrentColor() const;
 	// returns number of rows in grid
 	unsigned int getRowSize() const;
 	// returns number of columns in grid
@@ -32,8 +38,9 @@ public:
 	void flood(Colors color);
 	// update counters of coresponding colors
 	void updateColorCounter(Colors oldColor, Colors newColor);
-	// true if player wins
-	bool isWin() const;
+	// true if grid completed
+	bool isDone() const;
+
 	// returns 2D array of pointers to blocks in grid
 	std::vector<std::vector<std::shared_ptr<Block>>> getBlocks();
 };

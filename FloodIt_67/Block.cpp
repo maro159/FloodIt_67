@@ -2,14 +2,17 @@
 #include "Block.h"
 #include "Grid.h"
 
-
 using namespace std;
 
 
 Block::Block(Colors color, Grid *gridOwner) : _color(color), _gridOwner(gridOwner), _changed(true) {}
 
 Colors Block::getColor() const { return _color; }
-bool Block::isChanged() const { return _changed; }
+bool Block::isChanged()
+{
+	return _changed;
+	_changed = false;
+}
 
 void Block::switchColor(Colors newColor)
 {
@@ -23,13 +26,18 @@ void Block::switchColor(Colors newColor)
 		// Update color counters
 		_gridOwner->updateColorCounter(oldColor, newColor);
 
-		// Change color of adjacents
+		// Change color of adjacents if they had the same color
 		for (auto& blockPtr : _adjacents)
 		{
-			blockPtr->switchColor(newColor);
+			if (blockPtr->getColor() == oldColor)
+			{
+				blockPtr->switchColor(newColor);
+			}
 		}
 	}
 }
+
+
 
 void Block::addAdjacent(shared_ptr<Block> blockPtr)
 {
