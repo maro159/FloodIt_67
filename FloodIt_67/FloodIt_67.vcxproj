@@ -139,14 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="App.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="ConsoleGUI.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Helpers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="ConsoleGUI.cpp" />
     <ClCompile Include="main.cpp" />

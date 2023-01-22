@@ -27,15 +27,13 @@ int main()
 	//cin >> colSize;
 	//cout << "Enter number of colors (2-6):\t";
 	//cin >> noOfColors;
-    unsigned char key, key2;
-    while (true)
-    {
-		key = cin.get();
-		key2 = getch();
-		cout << "cin\t" << key << endl;
-		system("pause");
-		cout << "getch\t" << key2 << endl;
-    }
+	unsigned char key = 0, key2;
+
+	//key = cin.get();
+	key2 = _getch();
+	//cout << "cin\t" << (int)key << endl;
+	//system("pause");
+	cout << "getch\t" << (int)key2 << endl;
 
    
 

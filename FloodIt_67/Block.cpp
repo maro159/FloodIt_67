@@ -1,5 +1,6 @@
 #include <ostream>
 #include "Block.h"
+#include "Grid.h"
 
 
 using namespace std;
@@ -23,14 +24,14 @@ void Block::switchColor(Colors newColor)
 		_gridOwner->updateColorCounter(oldColor, newColor);
 
 		// Change color of adjacents
-		for (Block* blockPtr : _adjacents)
+		for (auto& blockPtr : _adjacents)
 		{
 			blockPtr->switchColor(newColor);
 		}
 	}
 }
 
-void Block::addAdjacent(Block* blockPtr)
+void Block::addAdjacent(shared_ptr<Block> blockPtr)
 {
 	_adjacents.push_back(blockPtr);
 }

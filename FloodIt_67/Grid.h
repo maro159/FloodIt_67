@@ -7,14 +7,15 @@
 class Grid
 {
 private:
+	Colors currentColor;
 	// number of rows in grid
 	unsigned int _rowSize;
 	// number of columns in grid
 	unsigned int _colSize;
 	// number of all colors used
 	unsigned int _noOfColors;
-	// vector of all Block objects which belong to the Grid
-	std::vector<std::vector<Block>> _blocks;
+	// vector of pointers to all Block objects which belong to the Grid
+	std::vector<std::vector<std::shared_ptr<Block>>> _blocks;
 	// map with number of Block objects of each color
 	std::map<Colors, unsigned int> _colorCounter;
 
@@ -33,6 +34,6 @@ public:
 	void updateColorCounter(Colors oldColor, Colors newColor);
 	// true if player wins
 	bool isWin() const;
-	// returns a reference to 2D array of blocks in grid
-	std::vector<std::vector<Block>>& getBlocks();
+	// returns 2D array of pointers to blocks in grid
+	std::vector<std::vector<std::shared_ptr<Block>>> getBlocks();
 };

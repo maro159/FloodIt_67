@@ -2,7 +2,9 @@
 #include <vector>
 #include <ostream>
 #include "Helpers.h"
-#include "Grid.h"
+
+
+class Grid;
 
 class Block
 {
@@ -12,7 +14,7 @@ private:
 	// color of the block
 	Colors _color;
 	// vector of pointers to Block objects which are adjacent to this
-	std::vector<Block*> _adjacents;
+	std::vector<std::shared_ptr<Block>> _adjacents;
 	// true if color the block has changed
 	bool _changed;
 
@@ -26,6 +28,6 @@ public:
 	// recursively changes color of the block and adjacent ones
 	void switchColor(Colors newColor);
 	// add block to list of adjacent ones by pointer
-	void addAdjacent(Block* block);
+	void addAdjacent(std::shared_ptr<Block> block);
 
 };

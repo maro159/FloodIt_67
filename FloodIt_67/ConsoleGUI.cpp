@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ConsoleGUI.h"
+using namespace std;
 
 std::map<Colors, int> colorDecoder
 {
@@ -45,7 +46,7 @@ void ConsoleGUI::setColor(Colors color)
 void ConsoleGUI::setCursor(unsigned int x, unsigned int y)
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD cord;
+    COORD cord{};
     cord.X = x;
     cord.Y = y;
     SetConsoleCursorPosition(out, cord);
@@ -72,18 +73,18 @@ void ConsoleGUI::redrawGrid(Grid& grid)
     auto rowSize = grid.getRowSize();
     auto colSize = grid.getColSize();
 
-    for (size_t row = 0; row < rowSize; row++)
+    for (unsigned int row = 0; row < rowSize; row++)
     {
-        for (size_t col = 0; col < colSize; col++)
+        for (unsigned int col = 0; col < colSize; col++)
         {
-            Block block = grid.getBlocks()[row][col];
-            if (block.isChanged())
+            shared_ptr<Block> block = grid.getBlocks()[row][col];
+            if (block->isChanged())
             {
                 // calculate x coord of block to be drawn (needs to be multiplied by 2 because of console char ratio is 2:1)
                 unsigned int blockXPos = _gridXPos + 2 * col * _blockSize;
                 // calculate y coord of block to be drawn
                 unsigned int blockYPos = _gridYPos + row * _blockSize;
-                drawBlock(blockXPos, blockYPos, block.getColor());
+                drawBlock(blockXPos, blockYPos, block->getColor());
             }
         }
     }
