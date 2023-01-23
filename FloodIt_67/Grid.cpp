@@ -1,12 +1,13 @@
 #include "Grid.h"
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 using namespace std;
 
-Grid::Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors) : _rowSize(rowSize), _colSize(colSize), _noOfColors(noOfColors)
+Grid::Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors) : _rowSize(rowSize), _colSize(colSize), _noOfColors(noOfColors), _moves(0)
 {
-	_maxMoves = 30; // TODO: calculate max moves
+	_maxMoves = floor(25 * (rowSize + colSize) * noOfColors / ((14 + 14) * 6)) + 1; // TODO: calculate max moves
 
 	// create counters for all colors
 	for (size_t i = 0; i < noOfColors; i++)
@@ -90,7 +91,7 @@ void Grid::updateColorCounter(Colors oldColor, Colors newColor)
 	_colorCounter[newColor]++;
 }
 
-bool Grid::isDone() const
+bool Grid::isOneColor() const
 {
 	for (const auto& colorCount : _colorCounter)
 	{

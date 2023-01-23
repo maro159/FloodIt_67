@@ -57,6 +57,7 @@ int ConsoleGUI::getUserInput(string text, string errorText, int min, int max)
         {
             cin.clear();
             cin.ignore();
+            firstTime = false;
         }
     }
 }
@@ -163,14 +164,12 @@ void ConsoleGUI::redrawGrid(Grid& grid)
 
 Colors ConsoleGUI::selectFloodColor(Grid& grid)
 {
-    unsigned int selectedColorNo = (int)grid.getCurrentColor();
+    unsigned int selectedColorNo = static_cast<int>(grid.getCurrentColor());
     unsigned int noOfColors = grid.getNoOfColors();
-    unsigned int xPos = _gridXPos + _blockXSize * (grid.getColSize() + 2); // TODO: some const value instead of 2 maybe
+    unsigned int xPos = _gridXPos + _blockXSize * (grid.getColSize() + 6); // TODO: some const value instead of 2 maybe
     unsigned int yPos = _gridYPos;
     drawFloodMenu(xPos, yPos, noOfColors, selectedColorNo);
     int key = 0;
-    const int UP = 0;
-    const int DOWN = 0;
     
 
     while (true)
@@ -180,27 +179,29 @@ Colors ConsoleGUI::selectFloodColor(Grid& grid)
         {
             return static_cast<Colors>(selectedColorNo);
         }
+        else if (key == Keys::ESC) return Colors::None; // exit game
         else if (key && key == 224)
         {
             key = _getch();
-            if (key == Keys::UP && selectedColorNo > 0)
+            if (key == Keys::UP)
             {
-                selectedColorNo--;
+                if (selectedColorNo > 0) { selectedColorNo--; }
+                else { selectedColorNo = noOfColors - 1; }
             }
-            else if (key == Keys::DOWN && selectedColorNo + 1 < noOfColors)
+            else if (key == Keys::DOWN)
             {
-                selectedColorNo++;
+                if (selectedColorNo + 1 < noOfColors) { selectedColorNo++; }
+                else { selectedColorNo = 0; }
             }
             drawFloodMenu(xPos, yPos, noOfColors, selectedColorNo);
         }
-
     }
-    return Colors();
+
 }
 
 void ConsoleGUI::printResult(Grid& grid)
 {
-    bool win = grid.isDone();
+    bool win = grid.isOneColor();
     setCursor(_gridXPos, _gridYPos + grid.getRowSize() * _blockYSize + 1);
     if (win) { cout << "YOU WON !!!" << endl;; }
     else { cout << "YOU LOSE !!!" << endl; }

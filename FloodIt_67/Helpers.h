@@ -2,7 +2,7 @@
 
 enum class Colors
 {
-    Green, Aqua, Red, Purple, Yellow, White, Default
+    Green, Aqua, Red, Purple, Yellow, White, Default, None
 };
 
 namespace Keys

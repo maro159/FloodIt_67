@@ -43,19 +43,20 @@ int main()
 			string textHeader = "**GAME SETTINGS**\nPress ESC to go back\n\n";
 			unsigned int rowSize = cGUI.getUserInput(textHeader + "Enter number of rows (2-20):\t", "Incorrect input, try again!", 2, 20);
 			unsigned int colSize = cGUI.getUserInput(textHeader + "Enter number of columns (2-20):\t", "Incorrect input, try again!", 2, 20);
-			unsigned int noOfColors = cGUI.getUserInput(textHeader + "Enter number of colors (2-6):\t", "Incorrect input, try again!", 2, 6);
+			unsigned int noOfColors = cGUI.getUserInput(textHeader + "Enter number of colors (3-6):\t", "Incorrect input, try again!", 3, 6);
 			Grid grid(rowSize, colSize, noOfColors);
 			cGUI.showConsoleCursor(false);
 			cGUI.consoleClear();
-			while (!grid.isDone() || (grid.getMoves() >= grid.getMaxMoves()))
-			{
-				cGUI.redrawGrid(grid);
-				cGUI.printMoveStat(grid);
-				Colors newColor = cGUI.selectFloodColor(grid);
-				grid.flood(newColor);
-			}
 			cGUI.redrawGrid(grid);
 			cGUI.printMoveStat(grid);
+			while (grid.getMoves() < grid.getMaxMoves() && !grid.isOneColor())
+			{
+				Colors newColor = cGUI.selectFloodColor(grid);
+				if (newColor == Colors::None) break; // detect if user entered ESC
+				grid.flood(newColor);
+				cGUI.redrawGrid(grid);
+				cGUI.printMoveStat(grid);
+			}
 			cGUI.printResult(grid);
 			
 			int key = 0;

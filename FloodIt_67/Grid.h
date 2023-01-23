@@ -39,7 +39,7 @@ public:
 	// update counters of coresponding colors
 	void updateColorCounter(Colors oldColor, Colors newColor);
 	// true if grid completed
-	bool isDone() const;
+	bool isOneColor() const;
 
 	// returns 2D array of pointers to blocks in grid
 	std::vector<std::vector<std::shared_ptr<Block>>> getBlocks();
