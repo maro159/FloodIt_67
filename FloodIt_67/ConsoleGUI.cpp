@@ -56,7 +56,7 @@ int ConsoleGUI::getUserInput(string text, string errorText, int min, int max)
         else
         {
             cin.clear();
-            cin.ignore();
+            cin.ignore(1000, '\n');
             firstTime = false;
         }
     }
