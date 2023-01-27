@@ -25,7 +25,9 @@ private:
 
 public:
 	Grid(unsigned int rowSize, unsigned int colSize, unsigned int noOfColors);
+	// returns number of moves done by player
 	unsigned int getMoves() const;
+	// returns number of allowed moves 
 	unsigned int getMaxMoves() const;
 	Colors getCurrentColor() const;
 	// returns number of rows in grid
