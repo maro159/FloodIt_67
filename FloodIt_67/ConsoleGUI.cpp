@@ -129,7 +129,7 @@ void ConsoleGUI::drawBlock(unsigned int x, unsigned int y, Colors color)
 
 void ConsoleGUI::drawFloodMenu(unsigned int xPos, unsigned int yPos, unsigned int noOfColors, unsigned int selectedColor)
 {
-    for (size_t i = 0; i < noOfColors; i++)
+    for (unsigned int i = 0; i < noOfColors; i++)
     {
         Colors color = static_cast<Colors>(i);
         drawBlock(xPos, yPos+ i * _blockYSize, color);
