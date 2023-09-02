@@ -4,6 +4,8 @@
 
 This project is a C++ implementation of the classic puzzle game "FloodIt." It was developed during Objective Programming course at AGH University of Science and Technology. In FloodIt, the goal is to fill the entire game board with a single color within a limited number of moves.
 
+![Screenshot](img/screen.jpg)
+
 ## Features
 
 - GUI-like interface in command line (works in Windows only)
@@ -26,6 +28,3 @@ Altenatively download compiled .exe file from **Released** section
 ## Notes
 Inspired by Jan Wolter's: https://unixpapa.com/floodit/
 
-## Screenshots
-
-![Screenshot](img/screen.jpg)
