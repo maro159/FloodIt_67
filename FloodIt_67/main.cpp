@@ -18,6 +18,7 @@ int main()
 	const unsigned int gridXPos = 0;
 	const unsigned int gridYPos = 0;
 
+	ConsoleGUI cGUI(blockSize, gridXPos, gridYPos, fontSize);
 
 	// main loop
 	while (true)
